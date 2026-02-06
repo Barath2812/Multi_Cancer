@@ -45,8 +45,8 @@ const cancerTypes = {
     all_cancer: {
         name: "All Cancer",
         description: "Multi-organ cancer detection from various medical images",
-        status: "coming_soon",
-        link: null
+        status: "ready",
+        link: "https://all-cancer.streamlit.app/"
     }
 };
 
