@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Cancer Detection System</title>
+    <meta name="description" content="AI-powered cancer detection system for 8 different cancer types">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Background gradient -->
+    <div class="gradient-bg"></div>
+
+    <!-- Main container -->
+    <div class="container">
+        <!-- Hero section -->
+        <header class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Multi-Cancer</span>
+                    <span class="hero-subtitle">Detection System</span>
+                </h1>
+                <p class="hero-description">
+                    AI-powered medical imaging analysis for early cancer detection across multiple organ systems.
+                    Upload medical images for instant classification and diagnosis assistance.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-number">8</div>
+                        <div class="stat-label">Cancer Types</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="models-ready">0</div>
+                        <div class="stat-label">Models Ready</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">AI</div>
+                        <div class="stat-label">Powered</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Cancer Overview Section -->
+        <section style="text-align: center; margin: 3rem 0; padding: 2rem;">
+            <img src="{{ url_for('static', filename='images/cancer.png') }}" alt="Cancer Overview"
+                style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); margin-bottom: 1.5rem;">
+            <p style="font-size: 1.1rem; color: #e0e0e0; max-width: 800px; margin: 0 auto; line-height: 1.6;">
+                There are over 200 types of cancer. 30 cancers are major by all cases. In that, 8 models are predicted
+                using the available image datasets. Other cancers are implemented in future.
+            </p>
+        </section>
+
+        <!-- Cancer detection cards -->
+        <section class="cancer-grid">
+            {% for cancer_id, cancer in cancers.items() %}
+            <div class="cancer-card {{ 'available' if cancer.status == 'ready' else 'unavailable' }}"
+                data-cancer="{{ cancer_id }}" data-status="{{ cancer.status }}">
+                <div class="card-glow"></div>
+                <div class="card-content">
+                    <!-- Status badge -->
+                    <div class="status-badge {{ cancer.status }}">
+                        {% if cancer.status == 'ready' %}
+                        <span class="status-icon">✓</span> Ready
+                        {% elif cancer.status == 'training' %}
+                        <span class="status-icon">⟳</span> Training
+                        {% else %}
+                        <span class="status-icon">!</span> Error
+                        {% endif %}
+                    </div>
+
+                    <!-- Cancer image -->
+                    <div class="card-image">
+                        <img src="{{ url_for('static', filename='images/' + cancer_id + '.png') }}"
+                            alt="{{ cancer.name }}"
+                            onerror="this.src='{{ url_for('static', filename='images/placeholder.png') }}'">
+                    </div>
+
+                    <!-- Cancer info -->
+                    <div class="card-info">
+                        <h2 class="card-title">{{ cancer.name }}</h2>
+                        <p class="card-description">{{ cancer.description }}</p>
+                    </div>
+
+                    <!-- Action button -->
+                    {% if cancer.status == 'ready' %}
+                    <a href="/detection/{{ cancer_id }}" class="card-button">
+                        <span>Start Detection</span>
+                        <svg class="button-arrow" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" />
+                        </svg>
+                    </a>
+                    {% else %}
+                    <button class="card-button disabled" disabled>
+                        <span>Coming Soon</span>
+                    </button>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>⚕️ For research and educational purposes only. Always consult healthcare professionals for medical
+                decisions.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Count and display ready models
+        const readyModels = document.querySelectorAll('[data-status="ready"]').length;
+        document.getElementById('models-ready').textContent = readyModels;
+
+        // Add hover effects
+        document.querySelectorAll('.cancer-card').forEach(card => {
+            card.addEventListener('mouseenter', function () {
+                this.style.transform = 'translateY(-8px)';
+            });
+
+            card.addEventListener('mouseleave', function () {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+
+</html>
