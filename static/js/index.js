@@ -36,7 +36,7 @@ const cancerTypes = {
         status: "coming_soon",
         link: null
     },
-    kidney_HE: {
+    kidney_stone: {
         name: "Kidney H&E",
         description: "Detection of kidney grade",
         status: "ready",
