@@ -36,11 +36,11 @@ const cancerTypes = {
         status: "coming_soon",
         link: null
     },
-    kidney_stone: {
-        name: "Kidney Stone",
-        description: "Detection of kidney stones from CT scan images",
-        status: "coming_soon",
-        link: null
+    kidney_HE: {
+        name: "Kidney H&E",
+        description: "Detection of kidney grade",
+        status: "ready",
+        link: "https://kidney-hande.streamlit.app/"
     },
     all_cancer: {
         name: "All Cancer",
