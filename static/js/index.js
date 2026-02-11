@@ -28,7 +28,7 @@ const cancerTypes = {
         name: "Breast Cancer",
         description: "Breast cancer detection from mammography and ultrasound images",
         status: "ready",
-        link: "https://breast-cancer-kagglex-project.streamlit.app/"
+        link: "https://breast-cancer-he.streamlit.app/"
     },
     lung_colon_cancer: {
         name: "Lung & Colon Cancer",
