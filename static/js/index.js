@@ -33,8 +33,8 @@ const cancerTypes = {
     lung_colon_cancer: {
         name: "Lung & Colon Cancer",
         description: "Detection of lung and colon cancer from histopathology images",
-        status: "coming_soon",
-        link: null
+        status: "ready",
+        link: "https://lungcolon.streamlit.app/"
     },
     kidney_stone: {
         name: "Kidney H&E",
